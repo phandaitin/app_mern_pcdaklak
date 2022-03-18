@@ -1,0 +1,26 @@
+I. SOURCE
+1. node -v  => version: v14.17.0
+2. npm -v   => version: 6.14.13
+3. postman
+4. git
+
+II. EXTENTIONS
+1. auto import (for react)
+2. auto rename tag
+3. ESLint
+4. code snippets (ES6, ES7)
+5. html to JSX
+6. Tabnine AI Autocomplete
+
+
+III. CODE BACKEND
+1. Tạo thư mục app và 2 thư mục con là backend và fronten
+2. Vào VS-> di chuyển đến thư mục backend (ý là code backend trước)   
+    - Chạy lệnh: PS F:\WEB_PCDAKLAK_MERNSTACK\app\backend> npm init để tạo project
+    - Chạy xong lệnh xuất hiện file pagekage.json
+    - cài package liên quan:
+        npm install express mongoose mongoose-slug-generator jsonwebtoken bcryptjs cors dotenv 
+        npm install --save-dev nodemon
+
+
+        DB_URI = mongodb://pcdaklak:Pcdaklak@127.0.0.1:27017/db_web
