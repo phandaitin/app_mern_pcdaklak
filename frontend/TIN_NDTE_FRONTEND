@@ -1,0 +1,24 @@
+II. CODE FRONTEND
+1. Tạo thư mục app và 2 thư mục con là backend và fronten
+2. Vào VS-> di chuyển đến thư mục frontent (ý là code frontend trước)   
+    - Chạy lệnh: PS F:\WEB_PCDAKLAK_MERNSTACK\app\frontend> npx create-react-app . để
+    tạo project
+    - Chạy xong lệnh xuất hiện Happy hacking!
+    - npm start (= npm run start) -> để xem trang web tại http://localhost:3000/
+    - cài thêm các pagekage
+        npm i react-router-dom bootstrap react-bootstrap axios
+
+III. GIT HUB
+    or create a new repository on the command line
+    echo "# web_react" >> README.md
+    
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin https://github.com/phandaitin/web_react.git
+    git push -u origin main
+    …or push an existing repository from the command line
+    git remote add origin https://github.com/phandaitin/web_react.git
+    git branch -M main
+    git push -u origin main

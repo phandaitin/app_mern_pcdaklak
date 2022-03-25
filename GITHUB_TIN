@@ -5,7 +5,7 @@ echo "# app_mern_pcdaklak" >> README.md
 git init
 --git add README.md
 git add .
-git commit -m "first commit"
+git commit -m "fix_18032022_1t"
 git branch -M main
 git remote add origin https://github.com/phandaitin/app_mern_pcdaklak.git
 git push -u origin main
