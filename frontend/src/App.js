@@ -1,5 +1,7 @@
 import { BrowserRouter as  Router, Routes , Route} from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/register";
+import Dashboard from "./components/dashboard/Dashboard";
 import Post from "./components/Post/Post";
 import {ADMIN_URI}  from './constants/const';
 
@@ -7,12 +9,16 @@ function App() {
   return (
 
     <Router>
-      <Dashboard />
+      {/* <Dashboard /> */}
 
       <Routes>        
-        
-        <Route path={`/${ADMIN_URI}/post`} element={<Post />}></Route>
-        
+          <Route path={`/${ADMIN_URI}/login`} element={<Dashboard />}  />
+          <Route path={`/${ADMIN_URI}/register`} element={<Register />} /> 
+          <Route path={`/${ADMIN_URI}/dashboard`} element={<Dashboard />}  />
+
+
+
+        {/* <Route path='*' element={ console.log('Not found') }></Route> */}
 
       </Routes>
     </Router>

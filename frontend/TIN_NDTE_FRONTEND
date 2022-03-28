@@ -7,6 +7,8 @@ II. CODE FRONTEND
     - npm start (= npm run start) -> để xem trang web tại http://localhost:3000/
     - cài thêm các pagekage
         npm i react-router-dom bootstrap react-bootstrap axios
+        npm i react-redux @reduxjs/toolkit
+        npm i axios
 
 III. GIT HUB
     or create a new repository on the command line
