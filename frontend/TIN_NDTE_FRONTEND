@@ -6,8 +6,9 @@ II. CODE FRONTEND
     - Chạy xong lệnh xuất hiện Happy hacking!
     - npm start (= npm run start) -> để xem trang web tại http://localhost:3000/
     - cài thêm các pagekage
-        npm i react-router-dom bootstrap react-bootstrap axios
-        npm i react-redux @reduxjs/toolkit
+        npm i react-router-dom axios 
+        npm i react-bootstrap bootstrap@5.1.3
+        npm i react-redux redux-thunk@2.3.0 @reduxjs/toolkit
         npm i axios
 
 III. GIT HUB
