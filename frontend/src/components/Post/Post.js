@@ -17,19 +17,19 @@ import { authSelector } from '../../store/reducers/AuthReducer';
 export default function Post() {
 
   const dispatch = useDispatch()
-  const { posts }  = useSelector(postSelector) // hoặc const {posts} = useSelector( state => state.postReducer)
-  const  {users }  = useSelector(authSelector)  
+  const { posts } = useSelector(postSelector) // hoặc const {posts} = useSelector( state => state.postReducer)
+  const { users } = useSelector(authSelector)
   //console.log(users)
 
   useEffect(() => {
     dispatch(getAllPost())
   }, [dispatch])
 
-     useEffect(() => {
-     dispatch(getCurrentUser())
-   }, [dispatch])
-  
- 
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
+
+
 
   //================================================
   const [inputState, setInputState] = useState({ name: '' })
@@ -99,17 +99,16 @@ export default function Post() {
   )
   //========================================================
   let renderpost = (
-    <Card className='mt-4'>
-  
+    <Card className='mt-3'>
       <Card.Header className as='h4'> Posts List: <span style={{ color: 'red' }}> {posts.length} </span>
         {/* <Button style={{ float: 'right' }} size='md' type="submit" onClick={() => { setOpenFormAdd(true) }}  > Add New</Button> */}
-      </Card.Header>          
+        <Button style={{ float: 'right' }} size='md' to={`/${ADMIN_URI}/postAdd`} as={Link}   > Add New</Button>
+      </Card.Header>
 
       <Card.Body >
-        
-      <Link to={`/${ADMIN_URI}/postAdd`} as={Link} >
-        <Button  className='mb-3' style={{ float: 'right' }} size='md' > Add New</Button>
-      </Link>
+        {/* <Link to={`/${ADMIN_URI}/postAdd`} as={Link} >
+          <Button className='mb-3' style={{ float: 'right' }} size='md'    > Add New</Button>
+        </Link> */}
 
         <Table striped bordered hover size="md">
           <thead>
@@ -120,7 +119,7 @@ export default function Post() {
               <th>Name</th>
               <th>Status</th>
               <th>Author</th>
-              <th>CreatedAt</th>              
+              <th>CreatedAt</th>
               <th className='text-center' >Action</th>
             </tr>
           </thead>
@@ -130,8 +129,7 @@ export default function Post() {
               //posts.slice(0,4).map((post, index) => (
               posts.map((post, index) => (
                 <tr key={post._id} style={post.check ? { background: '#ccd' } : { background: '' }}>
-                 
-                  <PostItem post={post} index={index} users={users}/>
+                  <PostItem post={post} index={index} users={users} />
                 </tr>
               ))
             }
@@ -144,6 +142,24 @@ export default function Post() {
 
   //========================================================
   return (<>
-   {renderpost}
-   </>)
+
+    <div className="sb-nav-fixed">
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+        <main>
+          <div className="container-fluid px-2">
+            {/* <h1 className="mt-4">Po</h1>
+            <ol className="breadcrumb mb-4">
+              <li className="breadcrumb-item active">Dashboard</li>
+            </ol> */}
+
+            {renderpost}
+
+          </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+  </>)
 }

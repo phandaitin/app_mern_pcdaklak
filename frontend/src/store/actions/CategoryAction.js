@@ -1,12 +1,15 @@
 
 
 import axios from 'axios';
-//import { useDispatch } from 'react-redux';
-import { ADD_ONE, API_URI, CHANGE_STATUS, DELETE_ONE, GET_ALL, GET_CHECKED, GET_ONE } from '../constants/const';
+ 
+import { useDispatch } from 'react-redux';
+import { ADD_ONE, API_URI, CHANGE_STATUS, DELETE_ONE, FIND_ONE, GET_ALL, GET_CHECKED, GET_ONE } from '../constants/const';
+import { CategoryReducer } from '../reducers/CategoryReducer';
 const collection = 'category'
-//const dispatch = useDispatch
-
+const dispatch = useDispatch  
 //================================================ 
+
+
 export const getAll = () => async dispatch => {
   try { 		//const response = await axios.get(			'https://jsonplaceholder.typicode.com/todos?_limit=3'		)
     const option = {
@@ -35,7 +38,6 @@ export const getAll = () => async dispatch => {
 //   })
 // }
 
-//export const getOne = async id => {
 export const getOne = (id) => async dispatch => {
   try {
     const option = {
@@ -43,12 +45,13 @@ export const getOne = (id) => async dispatch => {
       url: `${API_URI}/${collection}/${id}`
     }
     const response = await axios(option)
+    
     if (response.data.success) {      
       dispatch({
         type: GET_ONE,
         payload: response.data.data
-        //payload: id
       })
+      //return response.data.data
     }
   } catch (error) {
     if (error.response.data)
@@ -58,10 +61,18 @@ export const getOne = (id) => async dispatch => {
   }
 }
 
-// export const getOne = (id) =>  dispatch => {
-//  // const editData = (items) => (dispatch) => {
-//   dispatch({type: GET_ONE, payload: id})
+//  export const findOne = categoryId => dispatch => {
+  //export const getOne = categoryId => dispatch => {    
+  //  export const getOne = categoryId =>  {    
+  // const category = CategoryReducer.categories.find(category => category._id === categoryId)
+  // //const post = postState.posts.find(post => post._id === Id)
+  // console.log(category)
+  // dispatch({ 
+  //   type: GET_ONE , 
+  //   payload: category 
+  // })
 //}
+ 
 
 //================================================ 
 export const addOne = (data) => async dispatch => {

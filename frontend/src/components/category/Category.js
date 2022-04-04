@@ -161,10 +161,14 @@ export default function Category() {
                     onClick={ ()=>{ getOneHandle(category._id) } }
                     //onClick={ ()=>{ console.log('name, category.name) } }
                     //onClick={() => { setOpenFormEdit(true) }}        
-                    >Edit </Button> {' '}
+                    to={`/${ADMIN_URI}/categoryEdit`}  as={Link} 
+                    >Edit1111</Button> {' '}
+
+                    
                     <Button variant="danger" size='sm'
                       //onClick={() => { console.log(category._id) }}
                       onClick={() => deleteHandle(category._id)}
+                      
                     >Delete</Button>
                     {/* <Button variant="danger" size='md' onClick={deleteOne.bind(this, category._id)}  >Delete</Button> */}
 

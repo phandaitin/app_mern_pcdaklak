@@ -13,6 +13,8 @@ import Login from "./components/auth/Login";
 import DashboardHOC from "./components/pages/DashboardHOC";
 import Home from "./components/Home/Home";
 import PostEdit from "./components/post/PostEdit";
+import CategoryEdit from "./components/category/CategoryEdit";
+import DashboardTemplate from "./components/dashboardTemplate/DashboardTemplate";
 
 
 
@@ -21,23 +23,31 @@ function App() {
   return (
 
     <Router>
-      <Dashboard />
+      {/* <Dashboard /> */}
       <Routes>
 
-        {/* <Route exact path={`/${ADMIN_URI}/dashboard`} element={<Dashboard /> } /> */}
+        <Route exact path={`/${ADMIN_URI}/dashboardTemplate`} element={<DashboardTemplate /> } />
         
 
         <Route path={`/${ADMIN_URI}/login`} element={<Login />} />
         <Route path={`/${ADMIN_URI}/register`} element={<Register />} />
         
 
-        <Route path={`/${ADMIN_URI}/post`} element={<Post />}  />
-        <Route path={`/${ADMIN_URI}/postAdd`} element={<PostAdd />} />
-        <Route path={`/${ADMIN_URI}/postEdit`} element={<PostEdit  />} />
-        <Route path={`/${ADMIN_URI}/category`}  element={<Category />} />
-          
+        {/* <Route path={`/${ADMIN_URI}/post`} element={<Post />}  /> */}
         
- 
+        
+        
+        {/* <Route path={`/${ADMIN_URI}/categoryEdit`}  element={<CategoryEdit />} /> */}
+
+          
+        <Route element ={< DashboardTemplate />}>
+          <Route path={`/${ADMIN_URI}/post`} element={<Post />}  />
+          <Route path={`/${ADMIN_URI}/postAdd`} element={<PostAdd />} />
+          <Route path={`/${ADMIN_URI}/postEdit`} element={<PostEdit />}  />
+
+          <Route path={`/${ADMIN_URI}/category`}  element={<Category />} />
+
+        </Route>
 
       </Routes>
     </Router>

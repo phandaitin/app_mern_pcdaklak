@@ -5,8 +5,9 @@ import { ADMIN_URI } from '../../store/constants/const';
 import { useSelector, useDispatch } from 'react-redux'
 //import {   getCurrentUser, login, userSelector } from '../../store/reducers/authSlice';
 // import Dashboard from '../post/Post';
-import { login } from '../../store/actions/AuthAction';
+import { getCurrentUser, login } from '../../store/actions/AuthAction';
 import { authSelector } from '../../store/reducers/AuthReducer';
+import DashboardTemplate from '../dashboardTemplate/DashboardTemplate';
 
 
 
@@ -15,7 +16,8 @@ export default function Login() {
     const navigator = useNavigate()
 
     const dispatch = useDispatch()
-    const { users } = useSelector(authSelector)
+    //const { user } = useSelector(authSelector)
+    //console.log(users.users)
 
     const [inputState, setInputState] = useState({ email: 'abc@gmail.com', password: '123456' })
     const { email, password } = inputState
@@ -26,6 +28,9 @@ export default function Login() {
     const onSubmitHandle = async (e) => {
         e.preventDefault()
         dispatch(await login(inputState))
+        //console.log(localStorage.getItem('token'))
+        navigator('/admin/dashboardTemplate')
+
         //if (!result.success) {
         //console.log('result',  result.success)  
         //console.log(isAuthenticated)
@@ -34,14 +39,14 @@ export default function Login() {
         //    }
     }
     //=================================================================
-    // if (localStorage.getItem('token') !== null) //if (!isAuthenticated || isAuthenticated === undefined)        
-    // {
-    //     console.log('ok')
-    //     return navigator('/dashboard')
-
-    //     //  <Dashboard />
-    // }
-    // else
+   
+    if (localStorage.getItem('token') !== null) //if (!isAuthenticated || isAuthenticated === undefined)        
+     {    
+        //console.log('ok')  
+        navigator('/admin/dashboardTemplate')
+        //<DashboardTemplate />
+     }
+    //  else
         return (<>
 
             <div className="bg-primary">
@@ -56,26 +61,27 @@ export default function Login() {
                                             <div className="card-body">
                                                 <form onSubmit={onSubmitHandle}>
                                                     <div className="form-floating mb-3">
-                                                        <input className="form-control" id="inputEmail" type="email" placeholder="name@example.com"
+                                                        <input className="form-control"  type="email" placeholder="name@example.com"
                                                             name='email' value={email} onChange={onChangeHandle}
                                                         />
-                                                        <label htmlFor="inputEmail">Email address</label>
+                                                        <label  >Email address</label>
                                                     </div>
                                                     <div className="form-floating mb-3">
-                                                        <input className="form-control" id="inputPassword" type="password" placeholder="Password"
+                                                        <input className="form-control"  type="password" placeholder="Password"
                                                             name='password' value={password} onChange={onChangeHandle}
                                                         />
-                                                        <label htmlFor="inputPassword">Password</label>
+                                                        <label >Password</label>
                                                     </div>
                                                     <div className="form-check mb-3">
-                                                        <input className="form-check-input" id="inputRememberPassword" type="checkbox" defaultValue />
-                                                        <label className="form-check-label" htmlFor="inputRememberPassword">Remember Password</label>
+                                                        <input className="form-check-input"   type="checkbox" defaultValue />
+                                                        <label className="form-check-label"  >Remember Password</label>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                         <a className="small" href="password.html">Forgot Password?</a>
-                                                        <Link className="btn btn-primary"
-                                                            to={`/${ADMIN_URI}/dashboard`}
-                                                            onClick={onSubmitHandle} > Login </Link>
+                                                        <Link className="btn btn-primary" to={`/${ADMIN_URI}/dashboardTemplate`} 
+                                                            onClick={onSubmitHandle} 
+                                                            > Login
+                                                         </Link>
                                                     </div>
                                                 </form>
                                             </div>

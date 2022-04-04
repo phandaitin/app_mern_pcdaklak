@@ -1,16 +1,17 @@
 
 
 
-import { ADD_ONE, CHANGE_STATUS, DELETE_ONE,  GET_ALL, GET_CHECKED, GET_ONE } from "../constants/const"
+import { ADD_ONE, CHANGE_STATUS, DELETE_ONE,  FIND_ONE,  GET_ALL, GET_CHECKED, GET_ONE } from "../constants/const"
 
 
 const initialState = {
   categories: [],
-  category: []
+  category: [{}]
 }
 export const CategoryReducer = (state = initialState, action) => {
   const { type, payload } = action
-  //export const CategoryReducer = (state = initialState, { type, payload }) => {
+  //export const CategoryReducer = (state = initialState, { type, payload }) => {  
+
 
   switch (type) {
     case GET_ALL:
@@ -19,15 +20,19 @@ export const CategoryReducer = (state = initialState, action) => {
         categories: payload
       }
     
-      case GET_ONE:        
+      case GET_ONE:               
       return {
           ...state,
-          category: payload    
-          //categories: state.categories.find(category => category._id === payload)     
-          //const post = postState.posts.find(post => post._id === Id)
+          category: payload              
         }
-    
-        case GET_CHECKED:
+
+
+      // case GET_ONE:
+      //   console.log('reducer  ' , payload) 
+      //   return { ...state, category: payload }
+
+      
+      case GET_CHECKED:
       return {
         ...state,
         categories: state.categories.map(category => {
@@ -61,7 +66,7 @@ export const CategoryReducer = (state = initialState, action) => {
 
 // Selector
 export const categorySelector = state => state.CategoryReducer
-
+ 
 
 // const initialState = {
 // 	todos: []

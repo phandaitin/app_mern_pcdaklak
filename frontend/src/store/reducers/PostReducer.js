@@ -1,10 +1,10 @@
 
-import {  ADD_ONE_POST,  CHANGE_STATUS_POST, DELETE_ONE_POST, GET_ALL_POST, GET_CHECKED_POST, GET_ONE_POST } from '../constants/const';
+import {  ADD_ONE_POST,  CHANGE_STATUS_POST, DELETE_ONE_POST, GET_ALL_POST, GET_CHECKED_POST, GET_ONE_POST, UPDATE_ONE_POST } from '../constants/const';
 
 
 const initialState = {
   posts: [],
-  post: []
+  post: [{}]
 }
 export const PostReducer = (state = initialState, action) => {
   const { type, payload } = action
@@ -16,12 +16,10 @@ export const PostReducer = (state = initialState, action) => {
         posts: payload
       }
     
-    case GET_ONE_POST:        
+    case GET_ONE_POST:         
       return {
           ...state,
-          posts: payload    
-          //posts: state.posts.find(post => post._id === payload)     
-          //const post = postState.posts.find(post => post._id === Id)
+          post: payload            
         }
     
     case GET_CHECKED_POST:
@@ -43,6 +41,16 @@ export const PostReducer = (state = initialState, action) => {
           ...state,          
           posts: state.posts.filter(post => post.id !== payload) 
         }
+
+      case UPDATE_ONE_POST:
+          const newPosts = state.posts.map(post =>
+            post._id === payload._id ? payload : post
+          )
+    
+          return {
+            ...state,
+            posts: newPosts
+          }
 
       case CHANGE_STATUS_POST:
 			return {

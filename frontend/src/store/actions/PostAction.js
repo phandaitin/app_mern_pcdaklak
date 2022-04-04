@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { API_URI, ADD_ONE_POST,  CHANGE_STATUS_POST, DELETE_ONE_POST, GET_ALL_POST, GET_CHECKED_POST, GET_ONE_POST } from '../constants/const';
+import { API_URI, ADD_ONE_POST,  CHANGE_STATUS_POST, DELETE_ONE_POST, GET_ALL_POST, GET_CHECKED_POST, GET_ONE_POST, UPDATE_ONE_POST } from '../constants/const';
 import { userSelector } from '../reducers/AuthReducer';
 const collection = 'post'
 
@@ -44,15 +44,17 @@ export const getOnePost = (id) => async dispatch => {
   try {
     const option = {
       method: 'get',
-      url: `${API_URI}/${collection}/${id}`
-    }
+      url: `${API_URI}/${collection}/${id}`     
+    }    
     const response = await axios(option)
+    //console.log('action: ',response.data.data )
+    
     if (response.data.success) {      
       dispatch({
         type: GET_ONE_POST,
-        payload: response.data.data
-        //payload: id
+        payload: response.data.data 
       })
+      
     }
   } catch (error) {
     if (error.response.data)
@@ -126,6 +128,28 @@ export const deleteOnePost = Id => async dispatch => {
       return error.response.data
     else
       return { success: false, message: error }
+  }
+}
+
+//============updateOnePost=============================== 
+export const updateOnePost = data => async dispatch => {
+  try {
+    const option = {
+      method: 'put',
+      url: `${API_URI}/${collection}/${data._id}`,
+      data
+    }
+    const response = await axios(option)
+    if (response.data.success) {
+      dispatch({
+        type: UPDATE_ONE_POST,
+        payload: response.data.data
+      })
+    }
+  } catch (error) {
+    return error.response.data
+      ? error.response.data
+      : { success: false, message:  error }
   }
 }
 //================================================ 

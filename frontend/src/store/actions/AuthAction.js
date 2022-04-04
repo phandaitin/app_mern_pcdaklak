@@ -14,9 +14,6 @@ export const getCurrentUser =  () => {
         headers: { Authorization: `Bearer ${token}` }
       }
       const response = await axios(option)      
-      
-      
-      //console.log( 'ACTION', response.data.userName  )
       if (response.data.success) {        
         dispatch({
           type: 'GET_CURRENT_USER',
@@ -42,6 +39,7 @@ export const login =  data => {
       }
       const response = await axios(option)
       localStorage.setItem("token", response.data.token)
+      console.log( 'ACTION', response.data.userName  )
       dispatch({
         type: 'GET_CURRENT_USER',
         payload:  response.data.userName        
@@ -57,15 +55,12 @@ export const login =  data => {
 }
 
 //==========================================================
-export const logout =  data => {
+export const logout =  () => {
   return async dispatch => {
     localStorage.removeItem("token")
     dispatch({
       type: 'GET_CURRENT_USER',
-      payload: {
-        isAuthenticated: false,
-        user: null
-      }
+      payload: null
     })
   }
 }

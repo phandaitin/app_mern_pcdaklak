@@ -1,18 +1,16 @@
 
 
 const initialState = {
-  users: []
+  user: []
 }
 export const AuthReducer = (state= initialState, action) => {
 const { type, payload   } = action
   switch (type) {
-    case 'GET_CURRENT_USER':      
-      
+    case 'GET_CURRENT_USER':            
       //console.log('REDUCER ',payload)
-
       return {
         ...state, 
-        users  : payload
+        user  : payload
       }
       
     default:

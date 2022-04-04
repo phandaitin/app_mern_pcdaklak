@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getAll } from '../../store/actions/CategoryAction'
-import { addOnePost, getOnePost } from '../../store/actions/PostAction'
+import { updateOnePost } from '../../store/actions/PostAction'
 import { ADMIN_URI } from '../../store/constants/const'
 import { categorySelector } from '../../store/reducers/CategoryReducer'
 import { postSelector } from '../../store/reducers/PostReducer'
@@ -11,34 +11,31 @@ import { postSelector } from '../../store/reducers/PostReducer'
 export default function PostEdit() {
 
   const dispatch = useDispatch()
-  const { categories } = useSelector(categorySelector) // hoặc const {categories} = useSelector( state => state.CategoryReducer)
-  const { posts }  = useSelector(postSelector) 
-  console.log('posts',posts.name)
+  const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   dispatch(getOAll())
-  // }, [dispatch])
+  const { categories } = useSelector(categorySelector)
+  const { post } = useSelector(postSelector)
 
+  const [editPost, setEditPost] = useState(post)
+  useEffect(() =>
+    setEditPost(post), [post]
+  )
 
+  useEffect(() => {
+    dispatch(getAll())
+  }, [dispatch])
 
-  //  const { createOne } = useContext(PostContext)
-  //  const { categoryState: { categories } } = useContext(CategoryContext)
-
-
-
-  const [editPost, setEditPost] = useState({ category: '', name: '', title: '', thumb: '', desc: '', content: '' })
   const { category, name, title, thumb, desc, content } = editPost
-
-  //   const [alertMessage, setAlertMessage] = useState(null)
-  //   let variant ='success'
 
   //====================================================================
   const resetForm = () => {
     setEditPost({ category: '', name: '', title: '', thumb: '', desc: '', content: '' })
+
   }
 
   function disableButton() {
-    return (category.length > 0 && name.length > 0 && title.length > 0 && desc.length > 0 && content.length > 0)
+    // return (category.length > 0 && name.length > 0 && title.length > 0 && desc.length > 0 && content.length > 0)
+    return true
   }
 
   const onChangeHandle = (e) => {
@@ -47,13 +44,11 @@ export default function PostEdit() {
 
   const onSubmitHandle = async (e) => {
     e.preventDefault()
-    await dispatch(getOnePost(editPost))
-    
+    await dispatch(updateOnePost(editPost))
+    navigate(`/${ADMIN_URI}/post`)
   }
 
   //====================================================================
-
-
 
   let renderPostEdit = (
     <Card className='mt-3'>
@@ -71,7 +66,7 @@ export default function PostEdit() {
             </Form.Label>
             <Col sm="10">
               <Form.Select
-                name='category'
+                name='name'
                 value={category}
                 onChange={onChangeHandle}
               >
@@ -90,7 +85,11 @@ export default function PostEdit() {
               Post name
             </Form.Label>
             <Col sm="10">
-              <Form.Control type="text" size="lg" name='name' value={posts.name} onChange={onChangeHandle} />
+              <Form.Control type="text" size="lg"
+                name='name'
+                value={name || ''}
+                onChange={onChangeHandle}
+              />
             </Col>
           </Form.Group>
 
@@ -99,7 +98,11 @@ export default function PostEdit() {
               Post title
             </Form.Label>
             <Col sm="10">
-              <Form.Control as="textarea" rows={3} name='title' value={title} onChange={onChangeHandle} />
+              <Form.Control as="textarea" rows={3}
+                name='title'
+                value={title || ''}
+                onChange={onChangeHandle}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3"  >
@@ -116,7 +119,11 @@ export default function PostEdit() {
               Descript Thumb
             </Form.Label>
             <Col sm="10">
-              <Form.Control type="text" size='sm' name='desc' value={desc} onChange={onChangeHandle} />
+              <Form.Control type="text" size='sm'
+                name='desc'
+                value={desc || ''}
+                onChange={onChangeHandle}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" >
@@ -124,7 +131,11 @@ export default function PostEdit() {
               Content
             </Form.Label>
             <Col sm="10">
-              <Form.Control type="text" name='content' value={content} onChange={onChangeHandle} />
+              <Form.Control type="text"
+                name='content'
+                value={content || ''}
+                onChange={onChangeHandle}
+              />
             </Col>
           </Form.Group>
 
@@ -148,6 +159,18 @@ export default function PostEdit() {
   )
 
   return (<>
-    {renderPostEdit}
+
+    <div className="sb-nav-fixed">
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+          <div className="container-fluid px-2">            
+
+            {renderPostEdit}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   </>)
 }
