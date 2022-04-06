@@ -38,8 +38,7 @@ export const login =  data => {
         data
       }
       const response = await axios(option)
-      localStorage.setItem("token", response.data.token)
-      console.log( 'ACTION', response.data.userName  )
+      localStorage.setItem("token", response.data.token)      
       dispatch({
         type: 'GET_CURRENT_USER',
         payload:  response.data.userName        

@@ -6,21 +6,26 @@ const { connectDB } = require('./configs/db')
 const express = require('express')
 const app = express()
 
+const path = require('path');
 const mongoose = require('mongoose')
 const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 
-
+//app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+global.__path_upload = __dirname + '/public/uploads'
+//global.__path_upload = __dirname + '/public/backend/upload'
 // router
 const authRoute = require('./routes/auth')
-const category = require('./routes/category')
-const post = require('./routes/post')
+const categoryRoute = require('./routes/category')
+const postRoute = require('./routes/post')
+const sliderRoute = require('./routes/slider')
 
 // mount the route
 app.use('/api/auth', authRoute)
-app.use('/api/category', category)
-app.use('/api/post', post)
+app.use('/api/category', categoryRoute)
+app.use('/api/post', postRoute)
+app.use('/api/slider', sliderRoute)
 
 
 

@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {   useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ADMIN_URI } from '../../store/constants/const';
+import { ADMIN_URI } from '../../../store/constants/const';
 
-import { useSelector, useDispatch } from 'react-redux'
-//import {   getCurrentUser, login, userSelector } from '../../store/reducers/authSlice';
-// import Dashboard from '../post/Post';
-import { getCurrentUser, login } from '../../store/actions/AuthAction';
-import { authSelector } from '../../store/reducers/AuthReducer';
-import DashboardTemplate from '../dashboardTemplate/DashboardTemplate';
-
+import {   useDispatch } from 'react-redux'
+import {  login } from '../../../store/actions/AuthAction';
+ 
 
 
 export default function Login() {
-
     const navigator = useNavigate()
 
     const dispatch = useDispatch()

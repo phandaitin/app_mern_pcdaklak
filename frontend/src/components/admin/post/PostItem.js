@@ -1,31 +1,30 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getCurrentUser } from '../../store/actions/AuthAction'
-import { changeStatusPost, deleteOnePost, getCheckedPost, getOnePost } from '../../store/actions/PostAction'
-import { ADMIN_URI } from '../../store/constants/const'
-import { authSelector } from '../../store/reducers/AuthReducer'
-import { postSelector } from '../../store/reducers/PostReducer'
+import { ADMIN_URI } from '../../../store/constants/const'
+
+import { changeStatusPost, deleteOnePost, getCheckedPost, getOnePost } from '../../../store/actions/PostAction'
+
+ 
 
 
-export default function PostItem({ post, index, users }) {
+export default function PostItem({ post, index, user }) {
 
 
   const dispatch = useDispatch()
-  //const  { posts111  }  = useSelector(postSelector) 
-  // console.log(users)
+ 
 
   const deleteHandle = (Id) => {
     dispatch(deleteOnePost(Id))
   }
   const getOneHandle = (Id) => {
     dispatch(getOnePost(Id))
-    //setInputState({ posts})
+ 
   }
 
-  let date = new Date(post.createdAt)
-  let flag = users !== post.author.name ? true : false
+  let date = new Date(post.createdAt)  
+  let flag = user !== post.author.name ? true : false
 
   //==========================================================================
   return (<>

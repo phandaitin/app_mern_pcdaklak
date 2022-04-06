@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { ADMIN_URI } from '../../store/constants/const'
-//import { register } from '../../store/reducers/authSlice'
-import Dashboard from '../post/Post'
+import { ADMIN_URI } from '../../../store/constants/const'
 
 export default function Register() {
 
@@ -28,7 +26,7 @@ export default function Register() {
     }
     //=================================================================
     if( localStorage.getItem('token') !==null) //if (!isAuthenticated || isAuthenticated === undefined)
-        <Dashboard />        
+     console.log('dax login')
     else     
     return (<>
         <h1> register </h1>

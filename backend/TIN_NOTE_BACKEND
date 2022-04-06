@@ -20,7 +20,9 @@ III. CODE BACKEND
     - Chạy xong lệnh xuất hiện file pagekage.json
     - cài package liên quan:
         npm install express mongoose mongoose-slug-generator jsonwebtoken bcryptjs cors dotenv 
+        npm i multer
         npm install --save-dev nodemon
+
 
 
         DB_URI = mongodb://pcdaklak:Pcdaklak@127.0.0.1:27017/db_web

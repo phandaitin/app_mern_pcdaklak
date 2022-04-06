@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React  from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Outlet } from 'react-router-dom'
-import { getCurrentUser, logout } from '../../store/actions/AuthAction'
-import { ADMIN_URI } from '../../store/constants/const'
-import { AuthReducer, authSelector } from '../../store/reducers/AuthReducer'
+import {   logout } from '../../../store/actions/AuthAction'
+import { ADMIN_URI } from '../../../store/constants/const'
+import {   authSelector } from '../../../store/reducers/AuthReducer'
 
-export default function DashboardTemplate() {
+export default function DashboardHOC() {
 
   
   const { user } = useSelector(authSelector)

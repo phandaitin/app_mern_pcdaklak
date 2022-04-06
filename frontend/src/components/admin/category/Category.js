@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ADMIN_URI } from '../../store/constants/const';
+import { ADMIN_URI } from '../../../store/constants/const';
 
 
-import { addOne, changeStatus, deleteOne, getAll, getChecked, getOne } from '../../store/actions/CategoryAction';
-import { categorySelector } from '../../store/reducers/CategoryReducer';
+import { addOne, changeStatus, deleteOne, getAll, getChecked, getOne } from '../../../store/actions/CategoryAction';
+import { categorySelector } from '../../../store/reducers/CategoryReducer';
 
 //============================================================
 export default function Category() {

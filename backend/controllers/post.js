@@ -11,7 +11,9 @@ getAll = async (req, res, next) => {
         //const data =  await myModel.find({}).populate('author' ,'name email -_id').select('content title')
         //const data =  await myModel.find({author: req.userId }).populate('author', ['username']).select('content title')  // TH này để lấy ra bài post của đúng author với   
         //const data =  await myModel.find({}).populate('author')                  // TH này để lấy ra tất cả bài post            
-        const data = await myModel.find({ }).populate('author', 'name email')                  // TH này để lấy ra tất cả thongo tin author
+        const data = await myModel.find({}).populate('author', 'name email') 
+        //.limit(3)
+        .sort({ createdAt: -1 })                 // TH này để lấy ra tất cả thongo tin author
         //const data =  await myModel.find({})
         return res.status(200).json({
             success: true,
@@ -25,28 +27,28 @@ getAll = async (req, res, next) => {
 }
 
 //[GET] /:categoryName
-getByCategory = async(req, res, next) => {        
-    try {        
-    let objWhere = {} 
-    if(req.params.category !== undefined &&req.params.category !== 'undefined' && req.params.category !== '')    
-        objWhere= {category: req.params.category}
-    //else objWhere= {}    
-     const data = await myModel.find(objWhere)        
+getByCategory = async (req, res, next) => {
+    try {
+        let objWhere = {}
+        if (req.params.category !== undefined && req.params.category !== 'undefined' && req.params.category !== '')
+            objWhere = { category: req.params.category }
+        //else objWhere= {}    
+        const data = await myModel.find(objWhere)
         res.status(200).json({
-            success: true,            
-            data  
+            success: true,
+            data
         })
     } catch (error) {
-        next(error)        
+        next(error)
     }
 
- }  
+}
 
 //[GET] /:id
 findOne = async (req, res, next) => {
     try {
         const { id } = req.params
-        const data = await myModel.findOne({_id: id })  // tra ve objec
+        const data = await myModel.findOne({ _id: id })  // tra ve objec
         //const data = await myModel.findById({_id: id })  // tra ve objec
         //const data = await myModel.find({_id : id})    // tra ve mang
         res.status(200).json({
@@ -64,6 +66,14 @@ findOne = async (req, res, next) => {
 //[POST] /createOne 
 createOne = async (req, res, next) => {
     try {
+        if (req.file == undefined || !req.file) { // nếu không chọn thì lưu hình mặc định
+            req.body.thumb =  'no_avatar.png';
+        } else {
+            req.body.thumb = req.file.filename;
+        }
+
+        console.log('req.file', req.file)
+        console.log('req.body.thumb', req.body.thumb)
         const data = await myModel.create({ ...req.body, author: req.userId })
         // --> req.userId là gia trị của hàm verify truyền qua                    
         // author : req.userId --> ngoài post ra lấy thêm author    
@@ -78,6 +88,20 @@ createOne = async (req, res, next) => {
         })
     }
 }
+
+// router.post('/save', uploadFileMiddleware.uploadFile('thumb', 'images'), myValidate, async (req, res, next) => {
+//     try {
+//         if (req.file == undefined || !req.file) { // nếu không chọn thì lưu hình mặc định
+//             req.body.thumb = 'no_avatar.png';
+//         } else {
+//             req.body.thumb = req.file.filename;
+//         }
+//         await myModel.create({ ...req.body, author: req.session.userName })
+//         res.redirect(linkIndex);
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 // [PUT] /updateOne/:id
 updateOne = async (req, res, next) => {
@@ -170,9 +194,9 @@ module.exports = {
     findOne,
     createOne,
     updateOne,
-    deleteOne,deleteOne1,
+    deleteOne, deleteOne1,
     changeStatus,
-    getByCategory    
+    getByCategory
 }
 
 

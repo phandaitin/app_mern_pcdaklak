@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { getAll } from '../../store/actions/CategoryAction'
-import { updateOnePost } from '../../store/actions/PostAction'
-import { ADMIN_URI } from '../../store/constants/const'
-import { categorySelector } from '../../store/reducers/CategoryReducer'
-import { postSelector } from '../../store/reducers/PostReducer'
+import { getAll } from '../../../store/actions/CategoryAction'
+import { updateOnePost } from '../../../store/actions/PostAction'
+import { ADMIN_URI } from '../../../store/constants/const'
+import { categorySelector } from '../../../store/reducers/CategoryReducer'
+import { postSelector } from '../../../store/reducers/PostReducer'
 
 export default function PostEdit() {
 

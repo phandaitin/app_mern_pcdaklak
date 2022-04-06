@@ -29,5 +29,8 @@ export const UPDATE_ONE_POST = 'UPDATE_ONE_POST'
 
 
 
+//==============CAROUSEL =============================
+export const GET_ALL_SLIDER = 'GET_ALL_SLIDER' 
+
 
 

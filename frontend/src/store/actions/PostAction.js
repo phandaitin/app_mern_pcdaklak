@@ -3,7 +3,6 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { API_URI, ADD_ONE_POST,  CHANGE_STATUS_POST, DELETE_ONE_POST, GET_ALL_POST, GET_CHECKED_POST, GET_ONE_POST, UPDATE_ONE_POST } from '../constants/const';
-import { userSelector } from '../reducers/AuthReducer';
 const collection = 'post'
 
 // const dispatch = useDispatch()
@@ -18,6 +17,7 @@ export const getAllPost = () => async dispatch => {
       url: `${API_URI}/${collection}`
     }
     const response = await axios(option)
+    //console.log('action',response.data.data)
     dispatch({
       type: GET_ALL_POST,
       payload: response.data.data

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link,  useNavigate } from 'react-router-dom'
-import { getAll } from '../../store/actions/CategoryAction'
-import { addOnePost } from '../../store/actions/PostAction'
-import { ADMIN_URI } from '../../store/constants/const'
-import { categorySelector } from '../../store/reducers/CategoryReducer'
+import { getAll } from '../../../store/actions/CategoryAction'
+import { addOnePost } from '../../../store/actions/PostAction'
+import { ADMIN_URI } from '../../../store/constants/const'
+import { categorySelector } from '../../../store/reducers/CategoryReducer'
 
-export default function PostAdd() {
+export default function PostAdd(props ) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -57,12 +57,75 @@ export default function PostAdd() {
     //   setAlertMessage(result.message)    //  result.message là kết quả trả ra từ coltroler của backend
     //   setTimeout(() => setAlertMessage(null), 5000) // an sau 5 giay
     // }
+
+    
+      // const formData = new FormData();
+      // formData.append('file', singleFile);
+      // //await singleFileUpload(formData, singleFileOptions);
+      // await singleFileUpload(formData );
+      // props.getsingle();
+    
+
+    
   }
+//=================UPLOAD SINGLE FILE =========================
+//   const [singleFile, setSingleFile] = useState('');
+
+//   const SingleFileChange = (e) => {
+//     setSingleFile(e.target.files[0]);
+//     //setSingleProgress(0);
+// }
+
+// // const singleFileOptions = {
+// //   onUploadProgress: (progressEvent) => {
+// //       const {loaded, total} = progressEvent;
+// //       const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
+// //       setSingleProgress(percentage);
+// //   }
+// // } 
+
+
+
+//  const [singleFile, setSingleFile] = useState('');
+ 
+
+// const SingleFileChange = (e) => {
+//   setSingleFile(e.target.files[0]);  
+// }
+
+// const uploadSingleFile = async () => {
+//   const formData = new FormData();
+//   formData.append('file', singleFile);
+//   await singleFileUpload(formData, singleFileOptions);
+//   props.getsingle();
+
+  // export const singleFileUpload = async (data, options) => {
+  //     try {
+  //         await axios.post(apiUrl + 'singleFile', data, options);
+  //     } catch (error) {
+  //         throw error;
+  //     }
+  // }
+
+//}
+
+// const uploadSingleFile = async () => {
+//   const formData = new FormData();
+//   formData.append('file', singleFile);
+//   await singleFileUpload(formData, singleFileOptions);
+//   props.getsingle();
+
+  // export const singleFileUpload = async (data, options) => {
+  //     try {
+  //         await axios.post(apiUrl + 'singleFile', data, options);
+  //     } catch (error) {
+  //         throw error;
+  //     }
+  // }
+
+//}
 
   //====================================================================
-
-
-
   let renderPostAdd = (
     <Card className='mt-3'>
       <Card.Header className='h3'>Add Post
@@ -72,7 +135,7 @@ export default function PostAdd() {
 
         {/* {alertMessage && <Alert variant={variant}> {alertMessage} </Alert>}           */}
 
-        <Form onSubmit={onSubmitHandle}  >
+        <Form onSubmit={onSubmitHandle} encType="multipart/form-data"  >
           <Form.Group as={Row} className="mb-3" >
             <Form.Label column sm="2">
               Category
@@ -110,14 +173,24 @@ export default function PostAdd() {
               <Form.Control as="textarea" rows={3} name='title' value={title} onChange={onChangeHandle} />
             </Col>
           </Form.Group>
+
           <Form.Group as={Row} className="mb-3"  >
             <Form.Label column sm="2">
-              Thumbnail
+              Upload Thumbnail
             </Form.Label>
-            <Col sm="10">
-              <Form.Control type="file" />
+            <Col sm="8">
+              <Form.Control type="file" name="thumb" value={thumb }  onChange= { onChangeHandle } />
             </Col>
+            <Col sm="2">              
+              <Button variant  ='danger' 
+                //onClick={() => uploadSingleFile()} 
+                //onClick={() =>  console.log(file.name ) } 
+              > Upload </Button>
+            </Col>
+            
           </Form.Group>
+        
+
 
           <Form.Group as={Row} className="mb-3" >
             <Form.Label column sm="2">

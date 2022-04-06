@@ -12,7 +12,7 @@ const { type, payload   } = action
         ...state, 
         user  : payload
       }
-      
+            
     default:
       return state
   }
